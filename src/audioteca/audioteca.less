@@ -1,0 +1,440 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+@title: Cormorant, serif;
+@text: Nunito, sans-serif;
+@sombreado: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+/* Colores en Hex */
+@color-1-dark: #030226;
+@color-2-medium-dark: #090740;
+@color-3-medium: #65648C;
+@color-5-light: #D9BFA9;
+@color-4-medium-light: #8C5D5D;
+@green: #66CDAA;
+@morado: #43038c;
+@gris-oscuro: #414141;
+@gris-claro: #525252;
+@blanco: rgb(200, 200, 200);
+
+* {
+    box-sizing: border-box;
+    margin: 0 auto;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* ocultar barras de scroll */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.grow:hover {
+    transform: scale(1.01);
+    transition: 60ms ease;
+    overflow: hidden;
+}
+
+button {
+    outline: none;
+    cursor: pointer;
+    border: 0px;
+    font-size: 1em;
+    background-color: transparent;
+}
+
+//-------ESTRUCTURA-----
+
+
+body {
+    width: 100vw;
+    //min-height: 100vh;
+    background-color: @gris-oscuro;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+        "header header"
+        "main   main"
+        "footer footer";
+}
+
+//------HEADER-------
+.header {
+    z-index: 9;
+    min-height: 65px;
+    width: 100%;
+    height: 10vh;
+    grid-area: header;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    position: fixed;
+    top: 0px;
+    background-color: darken(@green, 15%);
+
+    -moz-box-shadow: inset 0 0 5px #000000;
+    -webkit-box-shadow: inset 0 0 5px #000000;
+    box-shadow: inset 0 0 5px #000000;
+
+    .animation-header {
+        position: absolute;
+        max-width: 50px;
+        left: 2%;
+        font-size: 1.9em;
+        text-size-adjust: 100%;
+        color: spin(@morado, 25);
+        font-family: Monoton, serif;
+
+        a {
+
+            &:link,
+            &:visited,
+            &:hover,
+            &:active {
+                text-decoration: none;
+                color: @morado;
+            }
+        }
+    }
+
+    .menu-items {
+        display: flex;
+        align-items: center;
+
+
+        li {
+            margin: 0 5px;
+
+            a {
+                padding: 9px 13px;
+                font-size: 22px;
+                display: block;
+            }
+        }
+
+
+    }
+
+    .btn_menu {
+        margin-right: 30px;
+        font-size: 25px;
+        color: @morado;
+        cursor: pointer;
+    }
+
+    ul.show {
+        top: 65px;
+        width: 100%;
+        height: 250px;
+        position: absolute;
+    }
+
+    .social {
+        width: 20vw;
+        position: absolute;
+        right: -5%;
+        color: @morado;
+
+        i {
+            padding-left: 1rem;
+            color: @morado;
+        }
+    }
+}
+
+//-----MAIN--------
+.main {
+    grid-area: main;
+    width: 100%;
+    margin-top: 10vh;
+    min-height: 80vh;
+
+    .titulo {
+        color: @blanco;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        font-size: 2.5em;
+        margin-top: 2rem;
+    }
+
+
+    .lista_audioteca {
+        z-index: 10;
+        grid-area: main;
+        color: @morado;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column nowrap;
+        padding: 15px;
+        gap: 1rem;
+
+        .empty {
+            width: 80vw;
+            height: 60vh;
+            line-height: 60vh;
+            box-shadow: @sombreado;
+            font-family: @text;
+            color: @green;
+            font-size: 1.5em;
+            text-align: center;
+            border: 2px solid #65648C;
+            border-radius: 25px;
+            background-color: lighten(@gris-claro, 15%);
+
+            a {
+                color: @morado;
+
+                &:link,
+                &:visited,
+                &:hover,
+                &:active {
+                    color: @morado;
+                }
+            }
+        }
+
+        .tema {
+            padding: 0.5rem;
+            width: 70vw;
+            min-width: 60vw;
+            font-family: @text;
+            border: 2px solid #65648C;
+            border-radius: 25px;
+            //box-shadow: @sombreado;
+            background-color: lighten(@gris-claro, 15%);
+            display: grid;
+
+            grid-template-areas:
+                "data canvas";
+
+            .popup {
+                display: none;
+            }
+
+            .left-theme {
+                grid-area: data;
+                display: grid;
+                grid-template-areas:
+                    "name"
+                    "control";
+
+
+                .header-tema {
+                    grid-area: name;
+                    font-size: 1.7em;
+                    color: @blanco;
+                    font-weight: bolder;
+                    font-family: @title;
+                    text-align: center;
+                    border-radius: 15px;
+                    min-width: 25vw;
+                }
+
+
+                span {
+                    color: lighten(@green, 55%);
+                }
+
+                .controles {
+                    grid-area: control;
+                    width: 100%;
+                    margin: 1vh 0 2vh 0;
+                    background-color: @gris-claro;
+                    border-radius: 12px;
+                    box-shadow: -3px -3px 30px 3px @green, 3px 3px 30px 3px @morado;
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0;
+                }
+
+
+                .fas:hover .popup,
+                .toForo:hover .popup,
+                .fromForo:hover .popup {
+                    color: black;
+                    font-family: @title;
+                    display: inline-block;
+                    position: absolute;
+                    bottom: 10%;
+                    left: 10%;
+                    background-color: fade(white, 81%);
+                    padding: 0.25em;
+                    border-radius: 25px;
+                    color: @gris-oscuro;
+                    width: 33vw;
+                }
+
+                .btn,
+                .icono,
+                .fas,
+                .far,
+                a {
+                    color: @green;
+                    font-size: 1.1em;
+                    padding: 2%;
+
+                    &:link,
+                    &:visited,
+                    &:hover,
+                    &:active {
+                        color: spin(@green, 180);
+                    }
+                }
+            }
+
+            .right-theme {
+                // width: 45%;
+                grid-area: canvas;
+                display: flex;
+                flex-flow: row;
+                justify-content: space-around;
+                //align-items: center;
+                //gap: 5%;
+
+
+                canvas {
+
+                    cursor: pointer;
+                    display: block;
+                    background-color: #b9e8d8a8;
+                    padding: 0.4em;
+                    border-radius: 12px;
+                    box-shadow: -2px -2px 20px 2px @morado, 2px 2px 20px 2px @green;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+        }
+
+    }
+}
+
+//------FOOTER------
+footer {
+    grid-area: footer;
+    color: @green;
+    position: relative;
+    background-color: @morado;
+    height: 10vh;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    line-height: 10vh;
+
+    a {
+        color: @green;
+    }
+}
+
+//------MEDIA------
+@media screen and (max-width:2560px) {
+
+    .btn_menu {
+        display: none;
+    }
+
+    .menu-items li a {
+        color: @morado;
+    }
+
+    .socialFo {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width:825px) {
+
+    .social {
+        display: none;
+    }
+
+    .socialFo {
+        display: block;
+    }
+
+    .menu-items {
+        position: absolute;
+        right: 2%;
+
+        li a {
+            font-size: 16px;
+            padding: 0;
+        }
+    }
+
+}
+
+@media screen and (max-width:700px) {
+    .header {
+        height: 10vh;
+        width: 100vw;
+        max-width: 100vw;
+    }
+
+    .btn_menu {
+        display: inline-flex;
+    }
+
+    .menu-items {
+        position: fixed;
+        width: 100vh;
+        height: calc(100%-65px);
+        background-color: @gris-oscuro;
+        top: -100vh;
+        text-align: center;
+        transition: all .4s;
+        flex-direction: column;
+        right: 0;
+
+        li {
+            margin: 30px 0 0 0;
+            line-height: 30px;
+
+            &:hover {
+                background-color: none;
+            }
+
+            a {
+                font-size: 20px;
+                color: @green;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .tema {
+        display: grid !important;
+        grid-template-areas:
+            "data"
+            "canvas" !important;
+    }
+
+    .left-theme {
+        width: 60%;
+    }
+
+    .right-theme {
+        display: flex;
+        flex-flow: row wrap !important;
+        justify-content: space-around;
+    }
+}
+
+@media all and (max-width:500px) {
+
+    footer {
+        position: relative;
+        height: 100%;
+        width: 100vw;
+        bottom: 0px;
+        flex-flow: column nowrap;
+    }
+}

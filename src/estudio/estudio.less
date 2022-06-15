@@ -1,0 +1,619 @@
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+
+@title: Cormorant, serif;
+@text: Nunito, sans-serif;
+@sombreado: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+/* Colores en Hex */
+
+@color-1-dark: #030226;
+@color-2-medium-dark: #090740;
+@color-3-medium: #65648C;
+@color-5-light: #D9BFA9;
+@color-4-medium-light: #8C5D5D;
+
+@green: #66CDAA;
+@morado: #43038c;
+@gris-oscuro: #414141;
+@gris-claro: #525252;
+
+* {
+    box-sizing: border-box;
+    margin: 0 auto;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* ocultar barras de scroll */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.grow:hover {
+    transform: scale(1.01);
+    transition: 60ms ease;
+    overflow: hidden;
+}
+
+button {
+    outline: none;
+    cursor: pointer;
+    border: 0px;
+    font-size: 1em;
+    background-color: transparent;
+}
+
+//------------ESTRUCTURA---------//
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: @gris-oscuro;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    /* esto verlo, no me gusta
+    esta a 20 porq es el % del header */
+
+    // grid-auto-rows: minmax(5%, auto);
+
+    grid-template-areas:
+        "header     header      header"
+        "rack       rack        rack"
+        "rack       rack        rack"
+        "rack       rack        rack"
+        "rack       rack        rack"
+        "controls   controls    controls"
+        "controls   controls    controls";
+
+}
+
+//------HEADER-------
+.header {
+    z-index: 9;
+    min-height: 65px;
+    width: 100%;
+    height: 10vh;
+    grid-area: header;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    position: fixed;
+    top: 0px;
+    background-color: darken(@green, 15%);
+
+    -moz-box-shadow: inset 0 0 5px #000000;
+    -webkit-box-shadow: inset 0 0 5px #000000;
+    box-shadow: inset 0 0 5px #000000;
+
+    .animation-header {
+        position: absolute;
+        max-width: 50px;
+        left: 2%;
+        font-size: 1.9em;
+        text-size-adjust: 100%;
+        color: spin(@morado, 25);
+        font-family: Monoton, serif;
+
+        a {
+
+            &:link,
+            &:visited,
+            &:hover,
+            &:active {
+                text-decoration: none;
+                color: @morado;
+            }
+        }
+    }
+
+    .menu-items {
+        display: flex;
+        align-items: center;
+
+        li {
+            margin: 0 5px;
+
+            a {
+                padding: 9px 13px;
+                font-size: 22px;
+                display: block;
+
+                &:link,
+                &:visited,
+                &:hover,
+                &:active {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    .btn_menu {
+        margin-right: 30px;
+        font-size: 25px;
+        color: @morado;
+        cursor: pointer;
+    }
+
+    ul.show {
+        top: 65px;
+        width: 100%;
+        height: 250px;
+        position: absolute;
+    }
+
+    .social {
+        width: 20vw;
+        position: absolute;
+        right: -5%;
+        color: @morado;
+
+        i {
+            padding-left: 1rem;
+            color: @morado;
+        }
+    }
+
+    .ayuda {
+        cursor: pointer;
+        font-size: 2em;
+    }
+
+
+    .fullpage-help {
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.849);
+        z-index: 22;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-width: 85vw;
+            max-height: 85vh;
+            z-index: 50;
+        }
+    }
+}
+
+
+//-------MAIN-------
+
+.main {
+    margin-top: 11vh;
+    color: @color-5-light;
+
+    .channel_rack {
+        grid-area: rack;
+        width: 100vw;
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-evenly;
+        background-color: @gris-claro;
+
+        .track {
+            &.kick {
+                border: 1px solid spin(@morado, 180);
+            }
+
+            &.snare {
+                border: 1px solid spin(@morado, -70);
+            }
+
+            &.hat {
+                border: 1px solid spin(@morado, 90);
+            }
+
+            &.clap {
+                border: 1px solid @morado;
+            }
+
+            flex-basis: 10vh;
+            background-color: @gris-oscuro;
+            width: 95vw;
+            display: grid;
+            align-items: center;
+            grid-template-columns: 10% 90%;
+            max-height: 12vh;
+
+            &.drummed {
+                border-width: 5px;
+                transition: 20ms;
+            }
+
+            .controls {
+                display: flex;
+                justify-content: space-between;
+                margin: 3%;
+
+                .fas {
+                    display: block;
+                }
+
+                .track_name {
+                    font-weight: bolder;
+                    font-size: 1em;
+                }
+            }
+
+
+            .beats {
+                //controlar en media q no sobresalga del track background
+                display: grid;
+                grid-template-columns: repeat(32, 1fr);
+                column-gap: 0.3vw;
+
+                .beat {
+                    width: 75/32vw;
+                    height: 8vh;
+                    background-color: darken(@green, 27%);
+                    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+                    &.timeline {
+                        background-color: lighten(@morado, 50%);
+                    }
+
+                    &.marked {
+                        background-color: lighten(@green, 17%);
+                        box-shadow: rgba(126, 132, 139, 0.4) 0px 0px 0px 2px, rgba(52, 60, 70, 0.65) 0px 4px 6px -1px, rgba(199, 199, 199, 0.08) 0px 1px 0px inset;
+                    }
+
+
+                    &.impar {
+                        background-color: darken(@green, 33%);
+
+                        &.marked {
+                            background-color: lighten(@green, 17%);
+                            box-shadow: rgba(126, 132, 139, 0.4) 0px 0px 0px 2px, rgba(52, 60, 70, 0.65) 0px 4px 6px -1px, rgba(199, 199, 199, 0.08) 0px 1px 0px inset;
+                        }
+
+                        &.timeline {
+                            background-color: lighten(@morado, 55%);
+                        }
+
+                    }
+
+                }
+            }
+        }
+    }
+
+    .slidecontainer {
+        grid-area: controls;
+        width: 20%;
+        margin: 1vh auto;
+
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4vh;
+            background: fade(@green, 70%);
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 4vh;
+                height: 4vh;
+                background: @color-5-light;
+                cursor: ew-resize;
+
+                &:active {
+                    background-color: lighten(@color-5-light, 15%);
+                    transition: .5s;
+                }
+            }
+
+            &::-moz-range-thumb {
+                width: 4vh;
+                height: 4vh;
+                background: @color-5-light;
+                cursor: ew-resize;
+            }
+        }
+
+        #currentBPM {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    @keyframes drumme {
+        from {}
+
+        to {
+            border: 7px solid @green;
+            border-bottom: none;
+        }
+    }
+
+    .controles {
+        background-color: @gris-claro;
+        grid-area: controls;
+        width: 50vw;
+        padding: 0.6%;
+        display: flex;
+        text-align: center;
+        border: 2px solid @color-5-light;
+        align-content: center;
+        justify-items: center;
+        box-shadow: rgba(62, 175, 150, 0.4) 0px 0px 0px 2px, rgba(66, 155, 85, 0.65) 0px 4px 6px -1px, rgba(226, 22, 192, 0.08) 0px 1px 0px inset;
+
+        &.drummed {
+            animation-duration: 0.6s;
+            animation-name: drumme;
+        }
+
+        .form-popup {
+            display: none;
+            position: fixed;
+            bottom: 5%;
+            max-width: 350px;
+            max-height: 500px;
+            right: 15px;
+            border: 3px solid fade(@green, 45%);
+            z-index: 9;
+
+            form {
+                max-width: 350px;
+                padding: 5px;
+                background-color: @gris-oscuro;
+
+                input,
+                select {
+                    width: 100%;
+                    padding: 15px;
+                    margin: 5px 0 22px 0;
+                    border: none;
+                    background: #c5c5c5;
+
+                    &:focus {
+                        background-color: lighten(@gris-claro, 55%);
+                        outline: none;
+                    }
+                }
+
+                button {
+                    background-color: darken(@green, 35%);
+                    color: white;
+                    padding: 16px 20px;
+                    border: none;
+                    cursor: pointer;
+                    width: 100%;
+                    margin-bottom: 10px;
+                    opacity: 0.8;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
+                .close {
+                    background-color: red;
+                }
+
+                .warning {
+                    color: red;
+                }
+
+                .warning-good {
+                    color: green;
+                    display: inline-block;
+                    text-decoration: none;
+                    font-size: 1.4em;
+                    cursor: pointer;
+
+
+                    a:link,
+                    a:visited,
+                    a:hover,
+                    a:active {
+                        text-decoration: none;
+                        color: green;
+                    }
+                }
+            }
+        }
+
+        button {
+            display: inline-block;
+            padding: 0.7px;
+            color: spin(@green, 190);
+            transition: all .5s;
+        }
+    }
+
+}
+
+//-----ANIMATIONS------
+
+
+//-----MEDIA-------
+
+@media screen and (max-width:2560px) {
+
+    .btn_menu {
+        display: none;
+    }
+
+    .menu-items li {
+        color: @morado;
+
+        .ayuda {
+            margin-left: 1.5em;
+        }
+    }
+
+}
+
+@media screen and (max-width:768px) {
+
+    .social {
+        display: none;
+    }
+
+    .menu-items {
+        position: absolute;
+        right: 0%;
+
+        li a {
+            font-size: 16px;
+            padding: 0;
+        }
+    }
+
+}
+
+@media screen and (max-width:600px) {
+    .kick {
+        .track_name {
+            span {
+                display: none;
+            }
+
+            &::after {
+                content: "K" !important;
+            }
+        }
+    }
+
+    .snare {
+        .track_name {
+            span {
+                display: none;
+            }
+
+            &::after {
+                content: "S" !important;
+            }
+        }
+    }
+
+    .hat {
+        .track_name {
+            span {
+                display: none;
+            }
+
+            &::after {
+                content: "H" !important;
+            }
+        }
+    }
+
+    .clap {
+        .track_name {
+            span {
+                display: none;
+            }
+
+            &::after {
+                content: "C" !important;
+            }
+        }
+    }
+
+    .header {
+        height: 10vh;
+        width: 100vw;
+        max-width: 100vw;
+    }
+
+    .btn_menu {
+        display: inline-flex;
+    }
+
+    .menu-items {
+        position: fixed;
+        width: 100vh;
+        height: calc(100%-65px);
+        background-color: @gris-oscuro;
+        top: -100vh;
+        text-align: center;
+        transition: all .4s;
+        flex-direction: column;
+        right: 0;
+
+        li {
+            margin: 0.5rem 0 auto auto !important;
+            line-height: 30px;
+            width: 100%;
+
+            &:hover {
+                background-color: none;
+            }
+
+            a {
+                font-size: 20px;
+                color: @green;
+                font-weight: bold;
+            }
+
+            .ayuda {
+                margin-left: 0;
+                color: @green;
+            }
+        }
+    }
+
+}
+
+@media all and (max-width:500px) {
+    .slidecontainer {
+        width: 35% !important;
+    }
+
+    footer {
+        position: relative;
+        height: 100%;
+        width: 100vw;
+        bottom: 0px;
+        flex-flow: column nowrap;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    header {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    header .animation-header {
+        margin: 20px;
+        width: 100%;
+    }
+
+    header .nav {
+        width: 100%;
+        flex-flow: column nowrap;
+    }
+
+    header .social {
+        width: 100%;
+    }
+}
